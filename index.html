@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Gestión de Usuarios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Encabezado -->
+        <header class="encabezado">
+            <h1>📋 Panel de Gestión de Usuarios</h1>
+            <p class="subtitulo">Gestiona los usuarios internos de tu organización</p>
+        </header>
+
+        <!-- Sección de Registro de Usuario -->
+        <section class="seccion-formulario">
+            <h2>Registrar Nuevo Usuario</h2>
+            <form id="formulario" class="formulario">
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre:</label>
+                    <input 
+                        type="text" 
+                        id="nombre" 
+                        placeholder="Ingrese el nombre completo"
+                        required
+                    >
+                    <span class="error" id="errorNombre"></span>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="edad">Edad:</label>
+                    <input 
+                        type="number" 
+                        id="edad" 
+                        placeholder="Ingrese la edad (mayor a 0)"
+                        min="1"
+                        required
+                    >
+                    <span class="error" id="errorEdad"></span>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="rol">Rol:</label>
+                    <select id="rol" required>
+                        <option value="">-- Seleccione un rol --</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Usuario">Usuario</option>
+                    </select>
+                    <span class="error" id="errorRol"></span>
+                </div>
+
+                <button type="button" class="btn btn-primario" onclick="agregarUsuario()">
+                    ➕ Agregar Usuario
+                </button>
+            </form>
+        </section>
+
+        <!-- Sección de Filtrado -->
+        <section class="seccion-filtro">
+            <h2>Filtrar Usuarios</h2>
+            <div class="controles-filtro">
+                <label for="filtro">Mostrar:</label>
+                <select id="filtro" onchange="filtrarUsuarios()">
+                    <option value="Todos">Todos los usuarios</option>
+                    <option value="Administrador">Solo Administradores</option>
+                    <option value="Usuario">Solo Usuarios</option>
+                </select>
+                <span class="contador" id="contador">Total: 0</span>
+            </div>
+        </section>
+
+        <!-- Sección de Visualización de Usuarios -->
+        <section class="seccion-tabla">
+            <h2>Lista de Usuarios</h2>
+            <div id="contenedor-tabla" class="contenedor-tabla">
+                <table id="tablaUsuarios" class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyTabla">
+                        <!-- Los usuarios se insertarán dinámicamente aquí -->
+                    </tbody>
+                </table>
+                <p id="mensajeVacio" class="mensaje-vacio">No hay usuarios registrados. ¡Agrega uno para comenzar!</p>
+            </div>
+        </section>
+
+        <!-- Pie de página -->
+        <footer class="pie-pagina">
+            <p>&copy; 2026 Panel de Gestión de Usuarios | Desarrollado con HTML, CSS y JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
