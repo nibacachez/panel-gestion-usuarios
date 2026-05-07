@@ -1,30 +1,18 @@
 // ========================================
-// COMENTARIO REFLEXIVO SOBRE USO DE IA
+// COMENTARIO SOBRE USO DE IA
 // ========================================
 // Pedí a la IA que validara mi código y sugiriera mejoras.
-// Aplicamos cambios en:
-// - Validaciones robustas con expresiones regulares
-// - Funciones auxiliares para cálculos (activos, inactivos, etc.)
-// - Ordenamiento automático de datos
-// - Mejor estructura y mantenibilidad
-// 
-// Ventajas: 
-//   • Mayor confianza en la integridad de los datos
-//   • Experiencia del usuario mejorada con mensajes claros
-//   • Código más modular y reutilizable
-// 
-// Riesgos: 
-//   • Validaciones muy estrictas pueden frustrar al usuario
-//   • Solución: Mostrar mensajes de ayuda claros
-//
+// Aplicamos validaciones robustas, funciones auxiliares y mejor estructura.
+// Ventajas: Mayor claridad y mantenibilidad.
+// Riesgos: Dependencia excesiva de IA.
+// Solución: Revisé cada sugerencia y la adapté al contexto.
 // ========================================
 
 // ========================================
-// DECLARACIÓN DE DATOS GLOBALES
+// DATOS GLOBALES
 // ========================================
 
-// Sugerencia de IA aplicada: Cambio de nombre de variable para mayor claridad
-// Array de usuarios con estructura inicial mejorada
+// Array de usuarios con estructura inicial
 let usuariosRegistrados = [
     { nombre: "Juan Pérez", edad: 30, rol: "Administrador", activo: true },
     { nombre: "María García", edad: 28, rol: "Usuario", activo: true },
@@ -32,11 +20,11 @@ let usuariosRegistrados = [
     { nombre: "Ana Martínez", edad: 26, rol: "Usuario", activo: true }
 ];
 
-// Sugerencia de IA aplicada: Variable para almacenar filtro actual
+// Variable para almacenar filtro actual
 let filtroActual = "Todos";
 
 // ========================================
-// FUNCIONES AUXILIARES DE VALIDACIÓN (Mejora propuesta por IA)
+// FUNCIONES AUXILIARES DE VALIDACIÓN
 // ========================================
 
 /**
@@ -45,7 +33,6 @@ let filtroActual = "Todos";
  * @returns {boolean} true si contiene solo letras y espacios
  */
 function esTextoValido(texto) {
-    // Sugerencia de IA: Usar expresión regular para validar solo letras
     const expresionRegular = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]{2,50}$/;
     return expresionRegular.test(texto.trim());
 }
@@ -56,7 +43,6 @@ function esTextoValido(texto) {
  * @returns {boolean} true si la edad está en el rango válido
  */
 function esEdadValida(edad) {
-    // Sugerencia de IA: Validación de rango específico
     return !isNaN(edad) && edad >= 18 && edad <= 65;
 }
 
@@ -66,7 +52,6 @@ function esEdadValida(edad) {
  */
 function limpiarCampoInvalido(idCampo) {
     const campo = document.getElementById(idCampo);
-    // Sugerencia de IA: Limpiar automáticamente para mejor UX
     if (campo && campo.classList.contains("error-activo")) {
         campo.value = "";
     }
@@ -84,7 +69,6 @@ function limpiarCampoInvalido(idCampo) {
  * @returns {boolean} true si la validación es exitosa, false en caso contrario
  */
 function validarFormulario() {
-    // Mejora propuesta por IA: Obtener referencias a elementos con selectores más específicos
     const campoNombre = document.getElementById("nombre");
     const campoEdad = document.getElementById("edad");
     const campoRol = document.getElementById("rol");
@@ -126,54 +110,43 @@ function validarFormulario() {
     }
 
     return esValido;
-
-// ========================================
-// FUNCIÓN: AGREGAR USUARIO (MEJORADA)
-// ========================================
+}
 
 /**
  * Captura los datos del formulario, valida y agrega un nuevo usuario al arreglo
  * Después actualiza la visualización de la tabla
- * Mejora propuesta por IA: Mejor manejo de errores y UX
  */
 function agregarUsuario() {
-    // Validar el formulario antes de proceder
     if (!validarFormulario()) {
         console.log("❌ Validación fallida - Datos inválidos ingresados");
         return;
     }
 
-    // Capturar datos del formulario
     const nombre = document.getElementById("nombre").value.trim();
     const edad = parseInt(document.getElementById("edad").value);
     const rol = document.getElementById("rol").value;
 
-    // Mejora propuesta por IA: Crear objeto con propiedades clara
     const nuevoUsuario = {
         nombre: nombre,
         edad: edad,
         rol: rol,
-        activo: true // Los nuevos usuarios comienzan activos
+        activo: true
     };
 
-    // Agregar el usuario al arreglo
     usuariosRegistrados.push(nuevoUsuario);
     console.log("✅ Usuario agregado correctamente:", nuevoUsuario);
 
-    // Limpiar el formulario
     document.getElementById("formulario").reset();
     document.getElementById("nombre").focus();
 
-    // Actualizar la visualización
     mostrarUsuarios();
 
-    // Resetear el filtro a "Todos"
     document.getElementById("filtro").value = "Todos";
     filtroActual = "Todos";
 }
 
 // ========================================
-// FUNCIONES AUXILIARES DE CÁLCULO (Mejora propuesta por IA)
+// FUNCIONES AUXILIARES DE CÁLCULO
 // ========================================
 
 /**
@@ -196,7 +169,6 @@ function calcularEstadisticas() {
 
 /**
  * Actualiza las tarjetas de estadísticas en la pantalla
- * Mejora propuesta por IA: Separar la lógica de cálculo de la presentación
  */
 function actualizarEstadisticas() {
     const stats = calcularEstadisticas();
@@ -208,7 +180,6 @@ function actualizarEstadisticas() {
 
 /**
  * Ordena el arreglo de usuarios por edad de forma ascendente
- * Mejora propuesta por IA: Uso de arrow functions para código más limpio
  * @returns {array} Arreglo de usuarios ordenados por edad
  */
 function ordenarPorEdad(usuariosArr) {
@@ -344,31 +315,21 @@ function cambiarEstado(indice) {
  * @param {number} indice - Índice del usuario en la tabla actual
  */
 function eliminarUsuario(indice) {
-    // Obtener usuarios filtrados y ordenados
     let usuariosFiltrados = filtrarPorRol(usuariosRegistrados, filtroActual);
     usuariosFiltrados = ordenarPorEdad(usuariosFiltrados);
     const usuarioAEliminar = usuariosFiltrados[indice];
 
-    // Confirmar eliminación
     if (confirm(`¿Está seguro de que desea eliminar a ${usuarioAEliminar.nombre}?`)) {
-        // Encontrar y eliminar del arreglo original
         const indiceOriginal = usuariosRegistrados.findIndex(u => u === usuarioAEliminar);
         const usuarioEliminado = usuariosRegistrados.splice(indiceOriginal, 1)[0];
 
         console.log("🗑️ Usuario eliminado:", usuarioEliminado);
-
-        // Actualizar la visualización
         mostrarUsuarios();
     }
 }
 
-// ========================================
-// FUNCIÓN: FILTRAR POR ROL (AUXILIAR - MEJORADA)
-// ========================================
-
 /**
  * Filtra el arreglo de usuarios por rol
- * Mejora propuesta por IA: Usar método filter() más legible
  * @param {array} usuariosArr - Arreglo de usuarios a filtrar
  * @param {string} rol - Rol por el cual filtrar ('Todos', 'Administrador', 'Usuario')
  * @returns {array} Arreglo filtrado de usuarios
@@ -380,44 +341,29 @@ function filtrarPorRol(usuariosArr, rol) {
     return usuariosArr.filter(usuario => usuario.rol === rol);
 }
 
-// ========================================
-// FUNCIÓN: FILTRAR USUARIOS (MEJORADA)
-// ========================================
-
 /**
  * Actualiza el filtro actual basado en la selección del usuario
  * y refresca la visualización de la tabla
- * Mejora propuesta por IA: Agregar validación del selector
  */
 function filtrarUsuarios() {
-    // Obtener el valor del selector de filtro
     const selectorFiltro = document.getElementById("filtro");
     filtroActual = selectorFiltro.value;
 
     console.log(`🔎 Filtrando por: ${filtroActual}`);
-
-    // Actualizar la visualización con el nuevo filtro
     mostrarUsuarios();
 }
-
-// ========================================
-// INICIALIZACIÓN DEL DOCUMENTO (MEJORADA)
-// ========================================
 
 /**
  * Se ejecuta cuando el DOM está completamente cargado
  * Inicializa la aplicación mostrando los usuarios existentes
- * Mejora propuesta por IA: Agregar event listeners para mejorar navegación
  */
 document.addEventListener("DOMContentLoaded", () => {
     console.log("🚀 Aplicación cargada correctamente");
     console.log("📊 Usuarios iniciales:", usuariosRegistrados);
 
-    // Mostrar usuarios al cargar la página
     mostrarUsuarios();
 
-    // Mejora propuesta por IA: Navegación mejorada con Tab
-    // Permitir agregar usuario presionando Enter en el campo de nombre
+    // Navegación mejorada con Enter
     document.getElementById("nombre").addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -425,7 +371,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Permitir agregar usuario presionando Enter en el campo de edad
     document.getElementById("edad").addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -470,4 +415,4 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("errorEdad").textContent = "";
         }
     });
-});
+});}
